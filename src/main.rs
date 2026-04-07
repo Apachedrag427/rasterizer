@@ -1,8 +1,8 @@
-use rasterizer::{Color3, Frame, Vector2};
+use rasterizer::frame::Frame;
+use rasterizer::types::{Color3, Rect, Vector2};
 
-pub mod renderers;
-
-use renderers::Renderer;
+use rasterizer::render;
+use rasterizer::render::RenderBackend;
 
 fn main() {
 	let width = 800;
@@ -11,7 +11,7 @@ fn main() {
 	let middle_x = width as f64 / 2.;
 	let middle_y = height as f64 / 2.;
 
-	let mut renderer = renderers::kitty_graphics::SHMRenderer;
+	let mut renderer = render::KittySHMRenderer;
 	renderer.begin_rendering();
 
 	loop {
@@ -56,7 +56,7 @@ fn main() {
 		);
 
 		frame.fill_rect(
-			rasterizer::Rect {
+			Rect {
 				position: Vector2::new(150., 150.),
 				dimensions: Vector2::new(100., 1.),
 			},
