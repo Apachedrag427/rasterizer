@@ -5,9 +5,9 @@ impl Frame {
 	// Explanation of Bresenham's Line Algorithm: https://www.youtube.com/watch?v=CceepU1vIKo
 	pub fn draw_line(&mut self, start: Vector2, end: Vector2, color: Color3) {
 		if (end.x - start.x).abs() > (end.y - start.y).abs() {
-			self.draw_line_horizontal(start, end, color);
+			self.draw_line_horizontal_int(start.into(), end.into(), color);
 		} else {
-			self.draw_line_vertical(start, end, color);
+			self.draw_line_vertical_int(start.into(), end.into(), color);
 		}
 	}
 
@@ -17,10 +17,6 @@ impl Frame {
 		} else {
 			self.draw_line_vertical_int(start, end, color);
 		}
-	}
-
-	fn draw_line_horizontal(&mut self, start: Vector2, end: Vector2, color: Color3) {
-		self.draw_line_horizontal_int(start.into(), end.into(), color);
 	}
 
 	fn draw_line_horizontal_int(
@@ -62,10 +58,6 @@ impl Frame {
 				p += 2 * dy;
 			}
 		}
-	}
-
-	fn draw_line_vertical(&mut self, start: Vector2, end: Vector2, color: Color3) {
-		self.draw_line_vertical_int(start.into(), end.into(), color);
 	}
 
 	fn draw_line_vertical_int(
