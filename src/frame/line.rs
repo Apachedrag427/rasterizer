@@ -47,7 +47,10 @@ impl Frame {
 			let mut y = start.y;
 			let mut p = 2 * dy - dx;
 			for x in 0..=dx {
-				self.set_pixel(start.x as usize + x as usize, y as usize, color);
+				if (start.x + x) >= 0 {
+					self.set_pixel((start.x + x) as usize, y as usize, color);
+				}
+
 				if p >= 0 {
 					y += dir;
 					p -= 2 * dx;
@@ -84,7 +87,10 @@ impl Frame {
 			let mut x = start.x;
 			let mut p = 2 * dx - dy;
 			for y in 0..=dy {
-				self.set_pixel(x as usize, start.y as usize + y as usize, color);
+				if (start.y + y) >= 0 {
+					self.set_pixel(x as usize, (start.y + y) as usize, color);
+				}
+
 				if p >= 0 {
 					x += dir;
 					p -= 2 * dy;

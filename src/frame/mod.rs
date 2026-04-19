@@ -27,11 +27,18 @@ impl Frame {
 
 	#[inline]
 	pub fn set_pixel(&mut self, x: usize, y: usize, color: Color) {
+		if x >= self.width || y >= self.height {
+			return;
+		}
 		self.set_pixel_i(y * self.width + x, color);
 	}
 
 	#[inline]
 	pub fn set_pixel_i(&mut self, i: usize, color: Color) {
+		if i >= self.data.len() {
+			return;
+		}
+
 		if color.a <= 0. {
 			return;
 		}

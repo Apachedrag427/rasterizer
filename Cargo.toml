@@ -1,8 +1,8 @@
 [package]
-name = "rasterizer"
+name = "engine"
 version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-base64 = "0.22.1"
-libc = "0.2.184"
+softbuffer = "0.4.8"
+winit = "0.30.13"

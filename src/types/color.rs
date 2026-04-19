@@ -66,6 +66,20 @@ impl Color {
 	}
 
 	#[inline]
+	pub fn get_rgb(&self) -> (u8, u8, u8) {
+		(
+			(self.r * 255.) as u8,
+			(self.g * 255.) as u8,
+			(self.b * 255.) as u8,
+		)
+	}
+
+	#[inline]
+	pub fn get_compact_rgb(&self) -> u32 {
+		(self.b * 255.) as u32 | (((self.g * 255.) as u32) << 8) | (((self.r * 255.) as u32) << 16)
+	}
+
+	#[inline]
 	pub fn get_lightness(&self) -> f64 {
 		(0.21 * self.r) + (0.72 * self.g) + (0.07 * self.b).clamp(0., 1.)
 	}

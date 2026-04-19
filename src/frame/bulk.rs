@@ -6,9 +6,17 @@ impl Frame {
 		self.fill_rect_int(rect.into(), color);
 	}
 
-	pub fn fill_rect_int(&mut self, rect: CoordinateRect, color: Color) {
+	pub fn fill_rect_int(&mut self, mut rect: CoordinateRect, color: Color) {
 		if rect.dimensions.x == 0 || rect.dimensions.y == 0 {
 			return;
+		}
+
+		if rect.position.x < 0 {
+			rect.dimensions.x += rect.position.x;
+			rect.position.x = 0;
+		}
+		if rect.position.x + rect.dimensions.x >= self.width as isize {
+			rect.dimensions.x += self.width as isize - (rect.position.x + rect.dimensions.x);
 		}
 
 		let start = rect.position;
@@ -107,6 +115,16 @@ impl Frame {
 		if dim.x == 0 || dim.y == 0 {
 			return;
 		}
+
+		// It is the caller's responsibility to ensure that the frame to draw is within the destination's bounds.
+		// Clipping the contents of a frame *after* drawing is difficult.
+		// // if position.x < 0 {
+		// // 	dim.x += position.x;
+		// // 	position.x = 0;
+		// // }
+		// // if position.x + dim.x >= self.width as isize {
+		// // 	dim.x += self.width as isize - (position.x + dim.x);
+		// // }
 
 		let start = position;
 		let mut end = position + dim;

@@ -2,7 +2,7 @@ use super::Frame;
 use crate::types::Color;
 
 pub enum FrameItem {
-	Pixel(usize, usize, Color),
+	PixelData(usize, usize, Color),
 	LineEnd,
 }
 
@@ -46,7 +46,7 @@ impl Iterator for FrameIter {
 			self.on_line_end = true;
 		}
 
-		Some(FrameItem::Pixel(current_x, current_y, current.clone()))
+		Some(FrameItem::PixelData(current_x, current_y, current.clone()))
 	}
 }
 

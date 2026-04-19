@@ -21,7 +21,14 @@ impl Frame {
 	}
 
 	pub fn draw_tri_int(&mut self, tri: CoordinateTriangle2d, color: Color) {
-		let bounds = tri.get_bounds_rect();
+		let mut bounds = tri.get_bounds_rect();
+		if bounds.position.x < 0 {
+			bounds.dimensions.x += bounds.position.x;
+			bounds.position.x = 0;
+		}
+		if bounds.position.x + bounds.dimensions.x >= self.width as isize {
+			bounds.dimensions.x += self.width as isize - (bounds.position.x + bounds.dimensions.x);
+		}
 		let mut frame = Frame::new(
 			bounds.dimensions.x.try_into().unwrap(),
 			bounds.dimensions.y.try_into().unwrap(),
